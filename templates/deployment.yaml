@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opensearch-exporter
+  labels:
+    app: opensearch-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: opensearch-exporter
+  template:
+    metadata:
+      labels:
+        app: opensearch-exporter
+    spec:
+      containers:
+      - name: opensearch-exporter
+        image: 162877423038.dkr.ecr.ap-south-1.amazonaws.com/naman-test:opensearch-exp
+        ports:
+        - containerPort: 8000
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+      restartPolicy: Always
